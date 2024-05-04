@@ -1,0 +1,18 @@
+h1 {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: gray;
+  padding: 8px 4px
+}
+
+.filter-container {
+  padding: 8px 40px;
+}
+
+.second-data {
+  white-space: pre-wrap;
+}

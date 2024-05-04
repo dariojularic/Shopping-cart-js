@@ -3,10 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
   <body>
+    <main>
+      <h1>Find your perfect car</h1>
+      <div class="container">
+        <div class="filter-container">
+          <label for="availability">Availability</label>
+          <select name="" id="availability">
+            <option value="all">All</option>
+            <option value="availability-yes">Available</option>
+            <option value="availability-no">Not Available</option>
+          </select>
+          <label for="sort-options">Sort Options</label>
+          <select name="" id="sort-options">
+            <option value="price-lowest">Price Lowest</option>
+            <option value="price-highest">Price Highest</option>
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+          </select>
+        </div>
+        <div class="cars">
+        </div>
+      </div>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

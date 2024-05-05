@@ -13,6 +13,7 @@ h1 {
   padding: 8px 40px;
 }
 
-.second-data {
+p {
   white-space: pre-wrap;
+  background-color: red;
 }

@@ -9,7 +9,7 @@ import { data } from './data.js'
 const carsContainer = document.querySelector(".cars");
 const carsUlList = document.querySelector(".cars-list");
 const availabilityFilter = document.querySelector("#availability");
-const unavailableOption = document.querySelector(".unavailable-cars")
+const sortOptions = document.querySelector("#sort-options")
 
 
 function shoppingCartFactory() {
@@ -21,10 +21,10 @@ function shoppingCartFactory() {
   const filterAvailable = (cars) => cars.filter((car) => car.available === "yes");
   const filterNotAvailable = (cars) => cars.filter((car) => car.available === "no");
 
-  const sortPriceHighest = (cars) => cars.sort((b, a) => a.price - b.price);
-  const sortPriceLowest = (cars) => cars.sort((a, b) => a.price - b.price);
-  const sortAToZ = (cars) => cars.sort((a, b) => a.name.localeCompare(b.name));
-  const sortZToA = (cars) => cars.sort((b, a) => a.name.localeCompare(b.name));
+  const sortPriceLowest = (cars) => cars.sort((b, a) => a.price - b.price);
+  const sortPriceHighest = (cars) => cars.sort((a, b) => a.price - b.price);
+  const sortZToA = (cars) => cars.sort((a, b) => a.name.localeCompare(b.name));
+  const sortAToZ = (cars) => cars.sort((b, a) => a.name.localeCompare(b.name));
 
   return {getCarsArray, setCarsArray, filterAvailable, filterNotAvailable, sortPriceHighest, sortPriceLowest, sortAToZ, sortZToA}
 }
@@ -65,7 +65,17 @@ updateCars(carsList.getCarsArray())
 availabilityFilter.addEventListener("input", () => {
   if (availabilityFilter.value === "availability-yes") updateCars(carsList.filterAvailable(carsList.getCarsArray()))
   if (availabilityFilter.value === "availability-no") updateCars(carsList.filterNotAvailable(carsList.getCarsArray()))
+  // ovo dole jos treba doradit
   if (availabilityFilter.value === "all") updateCars(carsList.setCarsArray(data))
 })
+
+sortOptions.addEventListener("input", () => {
+  if (sortOptions.value === "price-lowest") updateCars(carsList.sortPriceLowest(carsList.getCarsArray()))
+  if (sortOptions.value === "price-highest") updateCars(carsList.sortPriceHighest(carsList.getCarsArray()))
+  if (sortOptions.value === "az") updateCars(carsList.sortAToZ(carsList.getCarsArray()))
+  if (sortOptions.value === "za") updateCars(carsList.sortZToA(carsList.getCarsArray()))
+})
+
+
 
 // setTimeout(carsList.setCarsArray(data), 1000)

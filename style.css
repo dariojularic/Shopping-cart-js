@@ -1,11 +1,26 @@
 h1 {
   text-align: center;
+  font-size: 56px;
+}
+
+h2 {
+  font-size: 40px;
+  margin: 16px 0px;
+}
+
+h4 {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 16px 0px;
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  background-color: gray;
+  /* display: flex; */
+  text-align: center;
+  /* justify-content: center; */
+  /* align-items: center; */
+
+  background-color: #9E9E9E;
   padding: 8px 4px
 }
 
@@ -13,7 +28,49 @@ h1 {
   padding: 8px 40px;
 }
 
-p {
-  white-space: pre-wrap;
+
+span {
+  font-size: 32px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+img {
+  height: 200px;
+  width: 300px;
+  margin: 32px 0px;
+}
+
+label {
+  font-size: 32px;
+
+}
+
+select {
+  font-size: 24px;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+}
+
+.car-info {
+  /* white-space: pre-wrap; */
+  min-width: none;
+  text-align: left;
+  margin: 0px 64px;
+}
+
+button {
+  height: 100px;
+  width: 140px;
+  border-radius: 8px;
   background-color: red;
+  font-size: 24px;
+  font-weight: 600;
 }

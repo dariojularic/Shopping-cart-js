@@ -6,11 +6,9 @@ import { data } from './data.js'
 // ispod kreatorske funkcije napravi setTImeout i setuj cars nakon jedne sekunde
 // pozovi update cars funkciju sa arrayem cars
 
-const carsContainer = document.querySelector(".cars");
 const carsUlList = document.querySelector(".cars-list");
 const availabilityFilter = document.querySelector("#availability");
 const sortOptions = document.querySelector("#sort-options")
-
 
 function shoppingCartFactory() {
   let carsArray = [];
@@ -18,28 +16,29 @@ function shoppingCartFactory() {
   const getCarsArray = () => carsArray;
   const setCarsArray = (cars) => carsArray = cars;
 
-  const filterAvailable = (cars) => cars.filter((car) => car.available === "yes");
-  const filterNotAvailable = (cars) => cars.filter((car) => car.available === "no");
+  const filter = (key, value, cars) => cars.filter((car) => car[key] === value);
 
   const sortPriceLowest = (cars) => cars.sort((b, a) => a.price - b.price);
   const sortPriceHighest = (cars) => cars.sort((a, b) => a.price - b.price);
   const sortZToA = (cars) => cars.sort((a, b) => a.name.localeCompare(b.name));
   const sortAToZ = (cars) => cars.sort((b, a) => a.name.localeCompare(b.name));
 
-  return {getCarsArray, setCarsArray, filterAvailable, filterNotAvailable, sortPriceHighest, sortPriceLowest, sortAToZ, sortZToA}
+  return {filter, getCarsArray, setCarsArray, sortPriceHighest, sortPriceLowest, sortAToZ, sortZToA}
 }
 
 function updateCars(cars) {
   carsUlList.innerHTML = "";
   for (let i = 0; i < cars.length; i++) {
     const html = `<li class="car">
-                    <h2>${cars[i].name}</h2>
-                    <img src="${cars[i].image}"/>
                     <div>
-                      <h4>Brand:</h4> <span>${cars[i].brand}</span>
-                      <h4>Manufactured Year:</h4> <span>${cars[i].manufacturedYear}</span>
-                      <h4>Doors:</h4> <span>${cars[i].doors}</span>
-                      <h4>Price:</h4> <span>${cars[i].price}</span>
+                      <h2>${cars[i].name}</h2>
+                      <img src="${cars[i].image}"/>
+                    </div>
+                    <div class="car-info">
+                      <h4><strong>Brand:</strong> ${cars[i].brand}</h4>
+                      <h4><strong>Manufactured Year:</strong> ${cars[i].manufacturedYear}</h4>
+                      <h4><strong>Doors:</strong> ${cars[i].doors}</h4>
+                      <h4><strong>Price:</strong> ${cars[i].price}</h4>
                     </div>
                     <div>
                       <h4>Available</h4> <span>${cars[i].available}</span>
@@ -62,11 +61,10 @@ const carsList = shoppingCartFactory();
 carsList.setCarsArray(data)
 updateCars(carsList.getCarsArray())
 
-availabilityFilter.addEventListener("input", () => {
-  if (availabilityFilter.value === "availability-yes") updateCars(carsList.filterAvailable(carsList.getCarsArray()))
-  if (availabilityFilter.value === "availability-no") updateCars(carsList.filterNotAvailable(carsList.getCarsArray()))
-  // ovo dole jos treba doradit
-  if (availabilityFilter.value === "all") updateCars(carsList.setCarsArray(data))
+availabilityFilter.addEventListener("input", (event) => {
+  // pojasnit donju liniju
+  const [key, value] = event.target.value.split("-");
+  updateCars(carsList.filter(key, value, carsList.getCarsArray()))
 })
 
 sortOptions.addEventListener("input", () => {

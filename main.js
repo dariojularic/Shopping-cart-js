@@ -6,8 +6,11 @@ import { data } from './data.js'
 // ispod kreatorske funkcije napravi setTImeout i setuj cars nakon jedne sekunde
 // pozovi update cars funkciju sa arrayem cars
 
-const carsContainer = document.querySelector(".cars")
-const carsUlList = document.querySelector(".cars-list")
+const carsContainer = document.querySelector(".cars");
+const carsUlList = document.querySelector(".cars-list");
+const availabilityFilter = document.querySelector("#availability");
+const unavailableOption = document.querySelector(".unavailable-cars")
+
 
 function shoppingCartFactory() {
   let carsArray = [];
@@ -27,6 +30,7 @@ function shoppingCartFactory() {
 }
 
 function updateCars(cars) {
+  carsUlList.innerHTML = "";
   for (let i = 0; i < cars.length; i++) {
     const html = `<li class="car">
                     <h2>${cars[i].name}</h2>
@@ -56,8 +60,12 @@ function updateCars(cars) {
 
 const carsList = shoppingCartFactory();
 carsList.setCarsArray(data)
-// setTimeout(carsList.setCarsArray(data), 1000)
-
 updateCars(carsList.getCarsArray())
 
+availabilityFilter.addEventListener("input", () => {
+  if (availabilityFilter.value === "availability-yes") updateCars(carsList.filterAvailable(carsList.getCarsArray()))
+  if (availabilityFilter.value === "availability-no") updateCars(carsList.filterNotAvailable(carsList.getCarsArray()))
+  if (availabilityFilter.value === "all") updateCars(carsList.setCarsArray(data))
+})
 
+// setTimeout(carsList.setCarsArray(data), 1000)

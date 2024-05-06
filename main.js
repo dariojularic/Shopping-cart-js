@@ -6,9 +6,17 @@ import { data } from './data.js'
 // ispod kreatorske funkcije napravi setTImeout i setuj cars nakon jedne sekunde
 // pozovi update cars funkciju sa arrayem cars
 
-// Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
-// setTimeout syntax
+
 // kako napravit da mi min width ne dozvoli da suzim prozor
+
+// napravit state loading koji ce bit na pocetku false
+// napravit funkc setLoading koja mijenja state na true ili false
+// unutar funck napravit validaciju da ne prihvaca nijednu vrijednost osim true ili false
+/* stavi loading na true prikazi loading spiner */
+/* stavi loading false prikazi cars
+global state factory
+why do we need react or vue, why not use javascript for everything */
+
 
 
 const carsUlList = document.querySelector(".cars-list");
@@ -58,8 +66,9 @@ function updateCars(cars) {
     const readyToBuy = document.querySelector(".ready");
     const btn = document.querySelector(".delete-btn");
     readyToBuy.style.backgroundColor = cars[i].available === "yes" ? "#00bb00" : "#e93535";
+    // izbrisat car iz statea
     btn.addEventListener("click", () => {
-      listItem.remove()
+      updateCars(cars.filter((car) => car.id !== cars[i].id))
     })
   }
 }
@@ -68,7 +77,10 @@ const carsList = shoppingCartFactory();
 carsList.setCarsArray(data)
 
 availabilityFilter.addEventListener("input", (event) => {
-  // pojasnit donju liniju prije =
+  // array destructuring
+  //object destructuring
+
+  // zasto all funkcionira?
   const [key, value] = event.target.value.split("-");
   updateCars(carsList.filter(key, value, carsList.getCarsArray()))
 })
@@ -84,5 +96,3 @@ sortOptions.addEventListener("input", () => {
 setTimeout(() => {
   updateCars(carsList.getCarsArray())
 }, 1000)
-
-// setTimeout(updateCars(carsList.getCarsArray), 1000)

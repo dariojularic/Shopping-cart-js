@@ -6,6 +6,11 @@ import { data } from './data.js'
 // ispod kreatorske funkcije napravi setTImeout i setuj cars nakon jedne sekunde
 // pozovi update cars funkciju sa arrayem cars
 
+// Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+// setTimeout syntax
+// kako napravit da mi min width ne dozvoli da suzim prozor
+
+
 const carsUlList = document.querySelector(".cars-list");
 const availabilityFilter = document.querySelector("#availability");
 const sortOptions = document.querySelector("#sort-options")
@@ -30,7 +35,7 @@ function updateCars(cars) {
   carsUlList.innerHTML = "";
   for (let i = 0; i < cars.length; i++) {
     const html = `<li class="car">
-                    <div>
+                    <div class="car-image">
                       <h2>${cars[i].name}</h2>
                       <img src="${cars[i].image}"/>
                     </div>
@@ -40,40 +45,44 @@ function updateCars(cars) {
                       <h4><strong>Doors:</strong> ${cars[i].doors}</h4>
                       <h4><strong>Price:</strong> ${cars[i].price}</h4>
                     </div>
-                    <div>
-                      <h4>Available</h4> <span>${cars[i].available}</span>
+                    <div class="action">
+                      <h4 class="ready"><strong>Available:</strong> ${cars[i].available}</h4>
+                      <button class="delete-btn">
+                        Delete
+                      </button>
                     </div>
-                    <button class="delete-btn">
-                      Delete
-                    </button>
                   </li>`;
 
     carsUlList.insertAdjacentHTML	("afterbegin", html)
     const listItem = document.querySelector(".car")
+    const readyToBuy = document.querySelector(".ready");
     const btn = document.querySelector(".delete-btn");
+    readyToBuy.style.backgroundColor = cars[i].available === "yes" ? "#00bb00" : "#e93535";
     btn.addEventListener("click", () => {
       listItem.remove()
     })
   }
 }
-
+// updateCars(carsList.getCarsArray())
 const carsList = shoppingCartFactory();
 carsList.setCarsArray(data)
-updateCars(carsList.getCarsArray())
 
 availabilityFilter.addEventListener("input", (event) => {
-  // pojasnit donju liniju
+  // pojasnit donju liniju prije =
   const [key, value] = event.target.value.split("-");
   updateCars(carsList.filter(key, value, carsList.getCarsArray()))
 })
 
 sortOptions.addEventListener("input", () => {
   if (sortOptions.value === "price-lowest") updateCars(carsList.sortPriceLowest(carsList.getCarsArray()))
-  if (sortOptions.value === "price-highest") updateCars(carsList.sortPriceHighest(carsList.getCarsArray()))
-  if (sortOptions.value === "az") updateCars(carsList.sortAToZ(carsList.getCarsArray()))
-  if (sortOptions.value === "za") updateCars(carsList.sortZToA(carsList.getCarsArray()))
+    if (sortOptions.value === "price-highest") updateCars(carsList.sortPriceHighest(carsList.getCarsArray()))
+      if (sortOptions.value === "az") updateCars(carsList.sortAToZ(carsList.getCarsArray()))
+        if (sortOptions.value === "za") updateCars(carsList.sortZToA(carsList.getCarsArray()))
 })
 
 
+setTimeout(() => {
+  updateCars(carsList.getCarsArray())
+}, 1000)
 
-// setTimeout(carsList.setCarsArray(data), 1000)
+// setTimeout(updateCars(carsList.getCarsArray), 1000)

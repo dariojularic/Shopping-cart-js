@@ -5,7 +5,7 @@ h1 {
 
 h2 {
   font-size: 40px;
-  margin: 16px 0px;
+  /* margin: 16px 0px; */
 }
 
 h4 {
@@ -20,7 +20,7 @@ h4 {
   /* justify-content: center; */
   /* align-items: center; */
 
-  background-color: #9E9E9E;
+  background-color: #646364;
   padding: 8px 4px
 }
 
@@ -35,12 +35,13 @@ span {
 
 ul {
   list-style-type: none;
+  padding: 0px 32px;
 }
 
 img {
   height: 200px;
   width: 300px;
-  margin: 32px 0px;
+  /* margin: 32px 0px; */
 }
 
 label {
@@ -55,22 +56,50 @@ select {
 }
 
 li {
+  background-color: #9E9E9E;
   display: flex;
-  justify-content: center;
+  justify-content:space-evenly;
+  margin: 32px 16px;
+  border-radius: 16px;
+  /* min-width: 600px; */
+  height: 320px;
 }
 
 .car-info {
   /* white-space: pre-wrap; */
   min-width: none;
   text-align: left;
-  margin: 0px 64px;
+  /* margin: 0px 64px; */
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 button {
-  height: 100px;
+  height: 80px;
   width: 140px;
   border-radius: 8px;
-  background-color: red;
+  background-color: #ff0000;
   font-size: 24px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.action > h4 {
+  /* background-color: #00bb00; */
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.car-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }

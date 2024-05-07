@@ -8,12 +8,9 @@ function globalLoadingFactory() {
   let loading = false;
 
   const getLoadingState = () => loading;
+  // typeof arg !== boolean return
   const setLoadingState = (boolean) => {
-    if (boolean === true || boolean === false) {
-      loading = boolean;
-    } else {
-      console.log("I need a boolean!");
-    }
+    if (boolean === true || boolean === false) loading = boolean;
   }
 
   return {getLoadingState, setLoadingState}
@@ -25,8 +22,14 @@ function shoppingCartFactory() {
   const getCarsArray = () => carsArray;
   const setCarsArray = (cars) => carsArray = cars;
 
-  const filter = (key, value, cars) => cars.filter((car) => car[key] === value);
+  const filter = (key, value) => {
+    console.log("carsArg")
+    carsArray = data
 
+    carsArray = carsArray.filter((car) => car[key] === value);
+    console.log("carsArray", carsArray)
+    return carsArray
+  }
   const sortPriceLowest = (cars) => cars.sort((b, a) => a.price - b.price);
   const sortPriceHighest = (cars) => cars.sort((a, b) => a.price - b.price);
   const sortZToA = (cars) => cars.sort((a, b) => a.name.localeCompare(b.name));
@@ -38,6 +41,7 @@ function shoppingCartFactory() {
 }
 
 function updateCars(cars) {
+  console.log("update cars", cars)
   carsUlList.innerHTML = "";
   for (let i = 0; i < cars.length; i++) {
     const html = `<li class="car" data-id=${cars[i].id}>
@@ -83,13 +87,20 @@ loader.setLoadingState(true);
 availabilityFilter.addEventListener("input", (event) => {
   // zasto all funkcionira?
   const [key, value] = event.target.value.split("-");
-  updateCars(carsList.filter(key, value, carsList.getCarsArray()))
+  console.log("getCarsArray", carsList.getCarsArray())
+  carsList.setCarsArray(carsList.filter(key, value))
+  console.log("getCarsArray", carsList.getCarsArray())
+  updateCars(carsList.getCarsArray())
 })
 
 carsUlList.addEventListener("click", (event) => {
   if (event.target.classList.contains("delete-btn")) {
     const listItemId = event.target.closest(".car").getAttribute("data-id");
+    // mogu li preko .container doci do <select>?
+    // console.log(event.target.closest(".container"))
     carsList.setCarsArray(carsList.deleteCar(carsList.getCarsArray(), parseInt(listItemId)));
+    // jel bolji UX ako stavim updateCars(carsList.filter(getCarsArray())) ???
+    console.log(carsList.getCarsArray())
     updateCars(carsList.getCarsArray());
   }
 })

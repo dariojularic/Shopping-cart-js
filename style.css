@@ -1,6 +1,5 @@
 main {
   background-color: #646364;
-
 }
 
 h1 {
@@ -12,7 +11,6 @@ h1 {
 
 h2 {
   font-size: 40px;
-  /* margin: 16px 0px; */
 }
 
 h4 {
@@ -46,7 +44,6 @@ ul {
 img {
   height: 200px;
   width: 300px;
-  /* margin: 32px 0px; */
 }
 
 label {
@@ -65,16 +62,13 @@ li {
   justify-content:space-evenly;
   margin: 32px 16px;
   border-radius: 16px;
-  /* min-width: 600px; */
   height: 320px;
   width: 1200px;
 }
 
 .car-info {
-  /* white-space: pre-wrap; */
   min-width: none;
   text-align: left;
-  /* margin: 0px 64px; */
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -98,7 +92,6 @@ button {
 }
 
 .action > h4 {
-  /* background-color: #00bb00; */
   padding: 8px 16px;
   border-radius: 8px;
 }
@@ -107,4 +100,35 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display:grid;
+  -webkit-mask: conic-gradient(from 15deg,#0000,#000);
+  animation: l26 1s infinite steps(12);
+}
+.loader,
+.loader:before,
+.loader:after{
+  background:
+    radial-gradient(closest-side at 50% 12.5%,
+     #f03355 96%,#0000) 50% 0/20% 80% repeat-y,
+    radial-gradient(closest-side at 12.5% 50%,
+     #f03355 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  transform: rotate(30deg);
+}
+.loader:after {
+  transform: rotate(60deg);
+}
+
+@keyframes l26 {
+  100% {transform:rotate(1turn)}
 }

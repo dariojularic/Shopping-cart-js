@@ -98,5 +98,5 @@ export const data = [
     price: 32000,
     available: "yes",
     image: "./images/subaru1.png",
-  },
+  }
 ];
